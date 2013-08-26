@@ -1,0 +1,6 @@
+{
+    "require": {
+        "zendframework/zend-config": "*",
+        "twig/twig": "1.*"
+    }
+}
