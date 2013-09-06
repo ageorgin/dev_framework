@@ -1,6 +1,7 @@
 {
     "require": {
         "zendframework/zend-config": "*",
-        "twig/twig": "1.*"
+        "twig/twig": "1.*",
+        "symfony/console": "*"
     }
 }
