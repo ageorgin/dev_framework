@@ -1,6 +1,13 @@
 <?php
 namespace Application\Command;
 
+/**
+ * Classe ajoutant la commande route:add à la console
+ * @author AGE
+ * @since	06/09/2013
+ *
+ **/
+
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
@@ -19,7 +26,7 @@ class AddRouteCommand extends Command
 	protected function execute(InputInterface $input, OutputInterface $output){
 		// load current route.ini
 		$reader = new \Zend\Config\Reader\Ini();
-		$route = $reader->fromFile(APPLICATION_ROOT.'/config/test_route.ini.php', true);
+		$route = $reader->fromFile(APPLICATION_ROOT.'/config/route.ini.php', true);
 				
 		// init dialog Helper
 		$dialog = $this->getHelperSet()->get('dialog');
@@ -47,12 +54,14 @@ class AddRouteCommand extends Command
 				'Please enter ID for the route : ',
 				function ($answer) use ($routeType, $route){
 					$keyMapping = 'mapping_url_statique';
+					$keyPattern = 'url_pattern';
 					if('dynamic' == $routeType){
 						$keyMapping = 'mapping_url_dynamique';
+						$keyPattern = 'url_dynamique_pattern';
 					}
 
 					
-					if(array_key_exists($answer, $route[$keyMapping]['url_pattern'])){
+					if(array_key_exists($answer, $route[$keyMapping][$keyPattern])){
 						throw new \RuntimeException(
 								'ID "'.$answer.'" already exists please enter another'
 						);
@@ -63,13 +72,71 @@ class AddRouteCommand extends Command
 		);
 		
 		// ask for route uri
+		$routeUri = $dialog->askAndValidate(
+				$output,
+				'Please enter uri route : ',
+				function ($answer) use ($routeType, $route){
+					$keyMapping = 'mapping_url_statique';
+					$keyPattern = 'url_pattern';
+					if('dynamic' == $routeType){
+						$keyMapping = 'mapping_url_dynamique';
+						$keyPattern = 'url_dynamique_pattern';
+					}
+					
+					if('static' === $routeType && false !== strpos($answer, '*')){
+						throw new \RuntimeException(
+								'Uri "'.$answer.'" seems to be dynamic but you choosed static route type. Please enter another'
+						);
+					}
+					
+					if(in_array($answer,  $route[$keyMapping][$keyPattern])){
+						throw new \RuntimeException(
+								'Uri "'.$answer.'" already exists please enter another'
+						);
+					}
+					
+					return $answer;
+				}
+		); 
+		
 		
 		// ask for Module
+		$module = $dialog->ask(
+				$output,
+				'Please enter module name : '
+		);
 		
 		// ask for Controller
+		$controller = $dialog->ask(
+				$output,
+				'Please enter controller name : '
+		);
 		
 		// ask for Action
+		$action = $dialog->ask(
+				$output,
+				'Please enter action method name : '
+		);
 		
-		$output->writeln($routeType.' # '.ucfirst($routeId));
+		// add new configuration to route.ini
+		if('dynamic' == $routeType){
+			$keyMapping = 'mapping_url_dynamique';
+			$route[$keyMapping]['url_dynamique_pattern'][$routeId] = $routeUri;
+			$route[$keyMapping]['url_dynamique_script'][$routeId]['module'] = ucfirst(strtolower($module));
+			$route[$keyMapping]['url_dynamique_script'][$routeId]['controller'] = ucfirst(strtolower($controller));
+			$route[$keyMapping]['url_dynamique_script'][$routeId]['action'] = lcfirst($action);
+		}else{
+			$keyMapping = 'mapping_url_statique';
+			$route[$keyMapping]['url_pattern'][$routeId] = $routeUri;
+			$route[$keyMapping]['url_script'][$routeId]['module'] = ucfirst(strtolower($module));
+			$route[$keyMapping]['url_script'][$routeId]['controller'] = ucfirst(strtolower($controller));
+			$route[$keyMapping]['url_script'][$routeId]['action'] = lcfirst($action);
+		}
+		
+		// write configuration to file
+		$writer = new \Zend\Config\Writer\Ini();
+		$writer->toFile(APPLICATION_ROOT.'/config/route.ini.php', $route);
+		
+		$output->writeln('Route added with success');
 	}
 }
