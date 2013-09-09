@@ -7,7 +7,8 @@ use Application\ControllerManager;
  * Classe permettant de faire rapprochement entre une url et les fichiers PHP effectuant les traitements
  * @author AGE
  * @since	20/05/2011	AGE Ajout d'un test supplémentaire sur l'existence des tableaux de routage
- * @since	26/07/2013	AGE	Utilisation de Zend_Config pour gérer les routes et utilisation de Module\Controller\Action 
+ * @since	26/07/2013	AGE	Utilisation de Zend_Config pour gérer les routes et utilisation de Module\Controller\Action
+ * @since	09/09/2013	AGE	Evolution méthode getRequestedUrl retourne "/" au lieu de "" pour la home
  *
 **/
 class Router{
@@ -153,6 +154,11 @@ class Router{
 		// supression du caractère '/' de fin
 		if('/' === substr($ret, -1)){
 			$ret = substr($ret, 0, strlen($ret) - 1);
+		}
+		
+		// ajout d'un / si $ret est vide --> il s'agit de la home
+		if('' === $ret){
+			$ret = '/';
 		}
 		
 		return $ret;
