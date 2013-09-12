@@ -3,8 +3,61 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "fe9b8091ecdb4c0ba0ceb99813b65788",
+    "hash": "7a66a42ffa9a756a9737ecce3c3a7f14",
     "packages": [
+        {
+            "name": "symfony/console",
+            "version": "v2.3.4",
+            "target-dir": "Symfony/Component/Console",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/Console.git",
+                "reference": "db78f8ff7fc9e28d25ff9a0bf6ddf9f0e35fbbe3"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/Console/zipball/db78f8ff7fc9e28d25ff9a0bf6ddf9f0e35fbbe3",
+                "reference": "db78f8ff7fc9e28d25ff9a0bf6ddf9f0e35fbbe3",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.3"
+            },
+            "require-dev": {
+                "symfony/event-dispatcher": "~2.1"
+            },
+            "suggest": {
+                "symfony/event-dispatcher": ""
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.3-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "Symfony\\Component\\Console\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Fabien Potencier",
+                    "email": "fabien@symfony.com"
+                },
+                {
+                    "name": "Symfony Community",
+                    "homepage": "http://symfony.com/contributors"
+                }
+            ],
+            "description": "Symfony Console Component",
+            "homepage": "http://symfony.com",
+            "time": "2013-08-17 16:34:49"
+        },
         {
             "name": "twig/twig",
             "version": "v1.13.2",
@@ -56,17 +109,17 @@
         },
         {
             "name": "zendframework/zend-config",
-            "version": "2.2.2",
+            "version": "2.2.4",
             "target-dir": "Zend/Config",
             "source": {
                 "type": "git",
                 "url": "https://github.com/zendframework/Component_ZendConfig.git",
-                "reference": "release-2.2.2"
+                "reference": "66c41423c7e461f58e33e241cdc6fe6dc4d6cee7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/zendframework/Component_ZendConfig/zipball/release-2.2.2",
-                "reference": "release-2.2.2",
+                "url": "https://api.github.com/repos/zendframework/Component_ZendConfig/zipball/66c41423c7e461f58e33e241cdc6fe6dc4d6cee7",
+                "reference": "66c41423c7e461f58e33e241cdc6fe6dc4d6cee7",
                 "shasum": ""
             },
             "require": {
@@ -98,21 +151,21 @@
                 "config",
                 "zf2"
             ],
-            "time": "2013-07-09 14:00:08"
+            "time": "2013-08-21 17:06:49"
         },
         {
             "name": "zendframework/zend-stdlib",
-            "version": "2.2.2",
+            "version": "2.2.4",
             "target-dir": "Zend/Stdlib",
             "source": {
                 "type": "git",
                 "url": "https://github.com/zendframework/Component_ZendStdlib.git",
-                "reference": "release-2.2.2"
+                "reference": "7c87ce4e840957596bf3401fa4ae4fb0355682e2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/zendframework/Component_ZendStdlib/zipball/release-2.2.2",
-                "reference": "release-2.2.2",
+                "url": "https://api.github.com/repos/zendframework/Component_ZendStdlib/zipball/7c87ce4e840957596bf3401fa4ae4fb0355682e2",
+                "reference": "7c87ce4e840957596bf3401fa4ae4fb0355682e2",
                 "shasum": ""
             },
             "require": {
@@ -142,7 +195,7 @@
                 "stdlib",
                 "zf2"
             ],
-            "time": "2013-06-20 18:01:22"
+            "time": "2013-08-21 17:08:07"
         }
     ],
     "packages-dev": [
