@@ -1,22 +1,29 @@
-; Fichier de configuration des urls
-
 [mapping_url_statique]
 url_pattern.test = "/test"
-
+url_pattern.about = "/about"
+url_pattern.home = "/"
 url_script.test.module = "Test"
 url_script.test.controller = "Test"
-url_script.test.action = "test" 
-
+url_script.test.action = "test"
+url_script.about.module = "Default"
+url_script.about.controller = "Default"
+url_script.about.action = "about"
+url_script.home.module = "Default"
+url_script.home.controller = "Default"
+url_script.home.action = "index"
 
 [mapping_url_dynamique]
 url_dynamique_pattern.edit_user = "/user/id/*"
 url_dynamique_pattern.edit_user_profile = "/user/id/*/profil"
-
+url_dynamique_pattern.about_version = "/about/version/*"
 url_dynamique_script.edit_user.module = "Test"
 url_dynamique_script.edit_user.controller = "Test"
 url_dynamique_script.edit_user.action = "editUser"
 url_dynamique_script.edit_user.param1 = "id"
-
 url_dynamique_script.edit_user_profile.module = "Test"
 url_dynamique_script.edit_user_profile.controller = "Test"
 url_dynamique_script.edit_user_profile.action = "userProfile"
+url_dynamique_script.about_version.module = "Default"
+url_dynamique_script.about_version.controller = "Default"
+url_dynamique_script.about_version.action = "getVersion"
+
